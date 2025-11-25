@@ -1,0 +1,41 @@
+// Online C++ compiler to run C++ program online
+#include <bits/stdc++.h>
+using namespace std;
+
+int peakElement(vector<int>& arr){
+    int n=arr.size();
+    int start=0;
+    int end=n-1;
+    int mid;
+
+    while(start<=end){
+        mid=start+(end-start)/2;
+        if(mid>0 && mid<n-1){
+            if(arr[mid] > arr[mid-1] && arr[mid] >arr[mid+1])return mid;
+            if(arr[mid+1] > arr[mid])start=mid+1;
+            else end=mid-1;
+        }
+        else if (mid==0){
+            if(arr[mid]>arr[mid+1])return mid;
+            else return mid+1;
+        }
+        else{
+            if(arr[mid]>arr[mid-1])return mid;
+            else return mid-1;
+        }
+
+    }
+}
+
+void solve(){
+    int n;
+    cin>>n;
+    vector<int> arr(n);
+    for(auto &it:arr)cin>>it;
+    cout<<peakElement(arr);
+}
+
+int main() {
+    solve();
+    return 0;
+}
